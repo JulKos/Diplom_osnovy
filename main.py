@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import time
 from tqdm import tqdm, tqdm_gui, trange
 from pprint import pprint
 
@@ -33,6 +34,8 @@ class VkUser:
         with open('data.json', 'w') as f:
             json.dump(info, f)
         data.update(res.json())
+        data_dict = {}
+        data_list = []
         res_dict = {}
         res_list = []
         for i in range(len(data['response']['items'])):
@@ -71,10 +74,10 @@ class YaUploader:
         headers = self.get_headers()
         for i in trange(len(data_list)):
             file_name = data_list[i]['file_name']
-            size = data_list[i]['size']
             url = data_list[i]['url']
             params = {'path': f'{path}/{file_name}', 'url': url, 'disable_redirects': False}
             response = requests.post(url=upload_url, headers=headers, params=params)
+            time.sleep(5)
             response.raise_for_status()
             if response.status_code == 201:
                 print('Загрузка прошла успешно.')
