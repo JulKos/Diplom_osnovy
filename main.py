@@ -2,7 +2,7 @@ import requests
 import json
 import os
 import time
-from tqdm import tqdm, tqdm_gui, trange
+from tqdm import trange
 from pprint import pprint
 
 os.chdir(r'D:\test\Netology\diplom_osnovy')
